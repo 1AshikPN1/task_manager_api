@@ -14,10 +14,11 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
     
 class Task(db.Model):
-    id = db.Column(db.Integer, primar_key = True)
+    id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(120), nullable = False)
     description = db.Column(db.Text)
     status = db.Column(db.String(20), default = 'pending')
     due_date = db.Column(db.Date)
     assigned_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     assigned_user = db.relationship('User', backref = 'tasks')
